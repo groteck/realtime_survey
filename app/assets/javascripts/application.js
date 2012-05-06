@@ -17,38 +17,28 @@
 //= require_tree .
 
 $(document).ready(function(){
-	$(function(){ 
-		$("#results").charts();
-	});   
-	var pusher = new Pusher('73eeab4587d011f092c8');
-	var myChannel = pusher.subscribe('survey-channel');
-	myChannel.bind('data-changed', function(data){ 
-		updateResults(data);
-	}); 
-	function updateResults(data){
-		var tbody = jQuery("#results tbody"); 
-		var html = ""; 
-		for (var i=0; i < data.length; i++) {
-			html += "<tr><td>" + data[i].title + "</td>" +
-				"<td>" + data[i].votes + "</td></tr>";
-		};
-		tbody.html(html);
-		jQuery(".chartscontainer").remove(); // remove old chart  
-		jQuery("#results").charts(); // redraw
-	};
+	// jQuery("#results").charts();
+	jQuery(function () {
+		var pusher = new Pusher('73eeab4587d011f092c8');
+		var myChannel = pusher.subscribe('survey-channel');
+		myChannel.bind('data-changed', function(data){
+			updateResults(data);
+		});
+	});
 	function updateResults(data){
 		jQuery.noticeAdd({
 			text: 'Results updated',
 			stay: false
 		});
+
 		var tbody = jQuery("#results tbody");
 		var html = "";
-		for (var i=0; i < data.length; i++) { 
+		for (var i=0; i < data.length; i++) {
 			html += "<tr><td>" + data[i].title + "</td>" +
 				"<td>" + data[i].votes + "</td></tr>";
-		}
-		tbody.html(html); 
-		jQuery(".chartscontainer").remove(); // remove old chart 
-		jQuery("#results").charts(); // show updated chart
+		}		
+		tbody.html(html);
+		jQuery(".chartscontainer").remove(); // remove old chart
+		// jQuery("#results").charts(); // show updated chart
 	}
 });

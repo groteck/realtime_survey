@@ -1,0 +1,13 @@
+<table id="results"> 
+  <% @survey_entries.each do |o| %>
+    <tr> 
+      <td><%= o['title'] %></td>  
+      <td><%= o['votes'] %></td>
+    </tr>  
+  <% end %>
+</table> 
+<form action="/survey_entries" method="POST" id="surveyEntries">
+  <% SurveyEntry::FORM_OPTIONS.each do |o| %>
+    <p><button name="choice" value="<%= o %>"><%= o %></button></p>
+  <% end %>
+</form>

@@ -11,13 +11,14 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery-notice
 //= require jquery-charts
 //= require jquery_ujs
 //= require_tree .
 
 $(document).ready(function(){
 	$(function(){ 
-		$("#results").chart();
+		$("#results").charts();
 	});   
 	var pusher = new Pusher('73eeab4587d011f092c8');
 	var myChannel = pusher.subscribe('survey-channel');
